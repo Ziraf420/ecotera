@@ -1,97 +1,147 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# ECOTERRA
 
-# Getting Started
+Ecoterra adalah aplikasi React Native yang berfokus pada kepedulian lingkungan dan menghubungkan komunitas yang peduli terhadap Bumi.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Fitur Utama
 
-## Step 1: Start Metro
+- Sistem autentikasi (login & register)
+- Tampilan informasi pengguna
+- UI modern dan responsif
+- Komponen kustom yang dapat digunakan kembali
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Prasyarat
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Sebelum memulai, pastikan Anda telah menginstal:
 
+- Node.js (versi 14 atau lebih tinggi)
+- npm atau yarn
+- JDK 11 atau lebih tinggi (untuk Android)
+- Android Studio (untuk Android)
+- Xcode (untuk iOS, hanya di macOS)
+- CocoaPods (untuk iOS, hanya di macOS)
+
+## Instalasi
+
+1. Clone repositori ini:
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+git clone https://github.com/username/ecotera.git
+cd ecotera
 ```
 
-## Step 2: Build and run your app
+2. Instal dependensi:
+```sh
+npm install
+# atau
+yarn install
+```
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+3. Untuk iOS (hanya macOS), instal dependensi CocoaPods:
+```sh
+cd ios
+bundle install
+bundle exec pod install
+cd ..
+```
+
+## Konfigurasi
+
+1. Buka file `src/services/auth.ts` dan sesuaikan URL API dengan backend Anda:
+```typescript
+const API_URL = 'http://your-backend-url:port'; // Ganti dengan URL API Anda
+```
+
+## Menjalankan Aplikasi
 
 ### Android
 
 ```sh
-# Using npm
+# Pastikan emulator Android atau perangkat fisik terhubung
 npm run android
-
-# OR using Yarn
+# atau
 yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### iOS (hanya macOS)
 
 ```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
+# atau
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Metro Server
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Untuk menjalankan server Metro secara terpisah:
+```sh
+npm start
+# atau
+yarn start
+```
 
-## Step 3: Modify your app
+## Struktur Proyek
 
-Now that you have successfully run the app, let's make changes!
+```
+ecotera/
+├── src/
+│   ├── assets/           # Gambar, font, dan aset lainnya
+│   ├── components/       # Komponen yang dapat digunakan kembali
+│   ├── hooks/            # Custom React hooks
+│   ├── interfaces/       # TypeScript interfaces
+│   ├── navigation/       # Konfigurasi navigasi
+│   ├── pages/            # Halaman/screen aplikasi
+│   ├── services/         # Layanan API dan fungsi helper
+│   └── style/            # Style dan tema aplikasi
+├── android/              # Konfigurasi native Android
+├── ios/                  # Konfigurasi native iOS
+└── ...
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Komponen Utama
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Autentikasi
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Aplikasi menggunakan token JWT untuk autentikasi yang disimpan di AsyncStorage. Alur autentikasi:
 
-## Congratulations! :tada:
+1. **Register**: Pengguna mendaftar dengan nama lengkap, username, email, password, dan kategori
+2. **Login**: Pengguna login dengan email dan password
+3. **Logout**: Pengguna logout dan token dihapus dari penyimpanan
 
-You've successfully run and modified your React Native App. :partying_face:
+### UI Components
 
-### Now what?
+Aplikasi menggunakan komponen kustom untuk konsistensi UI:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- **Button**: Tombol dengan dukungan loading state
+- **Input**: Input field dengan validasi dan dukungan ikon
+- **Dropdown**: Dropdown selector untuk kategori
+- **CustomAlert**: Alert dialog kustom dengan berbagai tipe (success, error, warning, info)
 
-# Troubleshooting
+## Troubleshooting
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Masalah Koneksi API
 
-# Learn More
+Jika mengalami masalah koneksi ke API:
+1. Pastikan backend server berjalan
+2. Periksa URL API di `src/services/auth.ts`
+3. Untuk pengembangan di emulator Android, gunakan IP lokal (bukan localhost)
 
-To learn more about React Native, take a look at the following resources:
+### Masalah Build
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Untuk masalah build Android:
+```sh
+cd android
+./gradlew clean
+cd ..
+npm run android
+```
+
+Untuk masalah build iOS:
+```sh
+cd ios
+bundle exec pod install --repo-update
+cd ..
+npm run ios
+```
+
+## Lisensi
+
+[MIT](LICENSE)

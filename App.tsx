@@ -1,28 +1,27 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
+ * Ecoterra - React Native App
+ * 
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar, LogBox } from 'react-native';
+import AppNavigator from './src/navigation/AppNavigator';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
+// Import tema
+import './src/style/theme';
+
+// Abaikan warning tertentu jika perlu
+LogBox.ignoreLogs(['Reanimated 2']);
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor={EStyleSheet.value('$backgroundColor')} />
+      <AppNavigator />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
