@@ -1,7 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
 // Definisikan base URL API
-const API_URL = 'http://192.168.18.48:3000'; // Ganti dengan URL API sebenarnya
+const API_URL = 'http://192.168.0.100:3000'; // Ganti dengan URL API sebenarnya
 
 // Interface untuk request dan response
 export interface LoginRequest {
